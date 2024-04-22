@@ -53,10 +53,73 @@ def createEventSuc():
 
         return 'Event created successfully'
     
+@app.route('/secret/resultsuc', methods = ['POST'])
+def createResult():
+    if request.method == 'POST':
+        weight = request.form.get('weight')
+        gender = request.form.get('gender')
+        athleteOne = request.form.get('athleteone')
+        stateOne = request.form.get('statecodeone')
+        sideOne = request.form.get('sideone')
+        scoreOne = request.form.get('athleteonescore')
+        athleteTwo = request.form.get('athletetwo')
+        stateTwo = request.form.get('statecodetwo')
+        sideTwo = request.form.get('sidetwo')
+        scoreTwo = request.form.get('athletetwoscore')
+        winner = request.form.get('winner')
+
+        collection = db["results"]
+        query = {"_id": weight}
+        document = collection.find_one(query)
+        
+        num = 0 if document is None else len(document)
+
+        post = {"_id": weight, 
+                    "1": {
+                    "nameone": athleteOne,
+                    "gender": gender,
+                    "stateone": stateOne,
+                    "sideone": sideOne,
+                    "scoreone": scoreOne,
+                    "statetwo": stateTwo,
+                    "nametwo": athleteTwo,
+                    "sidetwo": sideTwo,
+                    "scoretwo": scoreTwo,
+                    "winner": winner
+                    }
+                }
+
+        if num == 0 or collection.count_documents({}) == 0:
+            collection.insert_one(post)
+        else:
+            postupdate = {str(num): {
+                        "nameone": athleteOne,
+                        "gender": gender,
+                        "stateone": stateOne,
+                        "sideone": sideOne,
+                        "scoreone": scoreOne,
+                        "statetwo": stateTwo,
+                        "nametwo": athleteTwo,
+                        "sidetwo": sideTwo,
+                        "scoretwo": scoreTwo,
+                        "winner": winner
+                    }}
+            collection.update_one(query, {"$set": postupdate})
+        
+    return "Result has been declared.."
 @app.route('/secret/resultupload')
 def result():
     return render_template('resultform.html')
 
+@app.route('/results')
+def res():
+    collection = db["results"]
+    init = collection.find()
+    
+    for docs in init:
+        print(docs)
+
+    return 'data'
 
 @app.route('/event')
 def event():

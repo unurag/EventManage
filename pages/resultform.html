@@ -3,18 +3,65 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Create Event</title>
+    <title>Create result</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href="{{ url_for('static',filename='styles/resultform.css') }}">
+    <script>
+            function populatePlayers() {
+        var selectedWeight = document.getElementById("weight").value;
+        var athletes = {{ data | tojson }};
+        console.log(selectedWeight)
+
+        var athleteDropdownone = document.getElementById("athleteone");
+        var athleteDropdowntwo = document.getElementById("athletetwo");
+        var winner = document.getElementById("winner")
+        var stateOne = document.getElementById("statecodeone")
+        var stateTwo = document.getElementById("statecodetwo")
+
+        stateOne.innerText = "";
+        stateTwo.innerHTML = "";
+        winner.innerHTML = "";
+        athleteDropdownone.innerHTML = ""; // Clear existing options
+        athleteDropdowntwo.innerHTML = ""; // Clear existing options
+
+        athletes[selectedWeight][1].forEach(function(player) {
+            var option1 = document.createElement("option");
+            option1.text = player;
+            athleteDropdownone.add(option1);
+
+            var option2 = document.createElement("option");
+            option2.text = player;
+            athleteDropdowntwo.add(option2);
+
+            var option3 = document.createElement("option");
+            option3.text = player;
+            winner.add(option3);
+        });
+
+        athletes[selectedWeight][0].forEach(function(player){
+            var option4 = document.createElement("option");
+            option4.text = player;
+            stateOne.add(option4);
+
+            var option5 = document.createElement("option")
+            option5.text = player;
+            stateTwo.add(option5)
+        });
+    }
+
+    // Call populatePlayers() initially to populate athletes based on default weight
+    populatePlayers();
+
+    </script>
 </head>
 <body>
     <div id="container">
     <div>
-        <form action="/secret/eventsuc" method="post" enctype="multipart/form-data">
+        <form action="/secret/resultsuc" method="post" enctype="multipart/form-data">
             <label for="weight">Weight</label>
-            <select id="weight" name="weight">
+            <select id="weight" name="weight" onchange="populatePlayers()">
                 {% for key, value in data.items() %}
-              <option value="83kg">{{ key }} kg</option>
+              <option value="{{ key }}">{{ key }} kg</option>
                 {% endfor %}
             </select>
 
@@ -26,18 +73,17 @@
 
             <label for="athleteone">Athlete 1</label>
             <select id="athleteone" name="athleteone">
-                <option value="Tushar">Tushar</option>
-                <option value="Anurag">Anurag</option>
+            <!--  using JavaScript -->
+
             </select>
 
-            <label for="statecode">State Code</label>
-            <select id="statecode" name="statecode">
-                <option value="up">UP</option>
-                <option value="uk">UK</option>
+            <label for="statecodeone">State Code</label>
+            <select id="statecodeone" name="statecodeone">
+
             </select>
 
-            <label for="side">Side</label>
-            <select id="side" name="side">
+            <label for="sideone">Side</label>
+            <select id="sideone" name="sideone">
                 <option value="red">Red</option>
                 <option value="blue">Blue</option>
             </select>
@@ -48,18 +94,16 @@
 
             <label for="athletetwo">Athlete 2</label>
             <select id="athletetwo" name="athletetwo">
-                <option value="Tushar">Tushar</option>
-                <option value="Anurag">Anurag</option>
+                <!-- using js -->
             </select>
 
-            <label for="statecode">State Code</label>
-            <select id="statecode" name="statecode">
-                <option value="up">UP</option>
-                <option value="uk">UK</option>
+            <label for="statecodetwo">State Code</label>
+            <select id="statecodetwo" name="statecodetwo">
+ 
             </select>
 
-            <label for="side">Side</label>
-            <select id="side" name="side">
+            <label for="sidetwo">Side</label>
+            <select id="sidetwo" name="sidetwo">
                 <option value="red">Red</option>
                 <option value="blue">Blue</option>
             </select>
@@ -70,8 +114,7 @@
 
             <label for="winner">Winner</label>
             <select id="winner" name="winner">
-                <option value="red">Tushar</option>
-                <option value="blue">Anurag</option>
+          
             </select>
 
             <input type="submit" value="Save"/>
