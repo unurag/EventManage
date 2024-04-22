@@ -4,6 +4,7 @@ from fileinput import filename
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 from flask_cors import CORS
+import openpyxl
 
 app = Flask(__name__, template_folder='pages')
 CORS(app)
@@ -50,7 +51,6 @@ def createEventSuc():
         collection.delete_many({})
         collection.insert_one(post)
 
-        print(eventName)
         return 'Event created successfully'
     
 @app.route('/secret/resultupload')
@@ -63,6 +63,33 @@ def event():
     collection = db['event']
     eventDet = collection.find_one({"_id":1})
     return eventDet
+
+@app.route('/formdatafetch')
+def formfetch():
+    try:
+        xl_file = openpyxl.load_workbook('./new.xlsx')
+        sheet = xl_file.active
+
+        dictn = {}
+
+        total_rows = sheet.max_row
+
+        for row in sheet.iter_rows(min_row=2, values_only=True):
+            state = row[0]
+            name = row[1]
+            weight = row[2]
+
+            if weight in dictn:
+                dictn[weight][0].append(state)
+                dictn[weight][1].append(name)
+            else:
+                dictn[weight] = ([state], [name])
+    except FileNotFoundError:
+        return "Error: File not found."
+    except Exception as e:
+        return "An error occurred: " + str(e)
+    
+    return render_template('resultform.html', data=dictn)
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -13,9 +13,9 @@
         <form action="/secret/eventsuc" method="post" enctype="multipart/form-data">
             <label for="weight">Weight</label>
             <select id="weight" name="weight">
-              <option value="83kg">83 kg</option>
-              <option value="56kg">56 kg</option>
-              <option value="64kg">64 kg</option>
+                {% for key, value in data.items() %}
+              <option value="83kg">{{ key }} kg</option>
+                {% endfor %}
             </select>
 
             <label for="gender">Gender</label>
