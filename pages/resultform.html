@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Create Event</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href="{{ url_for('static',filename='styles/resultform.css') }}">
+</head>
+<body>
+    <div id="container">
+    <div>
+        <form action="/secret/eventsuc" method="post" enctype="multipart/form-data">
+            <label for="weight">Weight</label>
+            <select id="weight" name="weight">
+              <option value="83kg">83 kg</option>
+              <option value="56kg">56 kg</option>
+              <option value="64kg">64 kg</option>
+            </select>
+
+            <label for="gender">Gender</label>
+            <select id="gender" name="gender">
+                <option value="mens">Mens</option>
+                <option value="womens">Womens</option>
+            </select>
+
+            <label for="athleteone">Athlete 1</label>
+            <select id="athleteone" name="athleteone">
+                <option value="Tushar">Tushar</option>
+                <option value="Anurag">Anurag</option>
+            </select>
+
+            <label for="statecode">State Code</label>
+            <select id="statecode" name="statecode">
+                <option value="up">UP</option>
+                <option value="uk">UK</option>
+            </select>
+
+            <label for="side">Side</label>
+            <select id="side" name="side">
+                <option value="red">Red</option>
+                <option value="blue">Blue</option>
+            </select>
+
+
+            <label for="athleteonescore">Score</label>
+            <input type="text" id="athleteonescore" name="athleteonescore" placeholder="Score.." />
+
+            <label for="athletetwo">Athlete 2</label>
+            <select id="athletetwo" name="athletetwo">
+                <option value="Tushar">Tushar</option>
+                <option value="Anurag">Anurag</option>
+            </select>
+
+            <label for="statecode">State Code</label>
+            <select id="statecode" name="statecode">
+                <option value="up">UP</option>
+                <option value="uk">UK</option>
+            </select>
+
+            <label for="side">Side</label>
+            <select id="side" name="side">
+                <option value="red">Red</option>
+                <option value="blue">Blue</option>
+            </select>
+
+
+            <label for="athletetwoscore">Score</label>
+            <input type="text" id="athletetwoscore" name="athletetwoscore" placeholder="Score.." />
+
+            <label for="winner">Winner</label>
+            <select id="winner" name="winner">
+                <option value="red">Tushar</option>
+                <option value="blue">Anurag</option>
+            </select>
+
+            <input type="submit" value="Save"/>
+        </form>
+    </div>
+</div>
+</body>
+</html>

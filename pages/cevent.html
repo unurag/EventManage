@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Create Event</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href="{{ url_for('static',filename='styles/cevent.css') }}">
+</head>
+<body>
+    <div>
+        <form action="/secret/eventsuc" method="post" enctype="multipart/form-data">
+            <label for="eventname">Event Name</label>
+            <input type="text" id="eventname" name="eventname" placeholder="Event name.." />
+            <label for="startdate">Start Date</label>
+            <input type="date" id="startdate" name="startdate" min="2024-04-22" max="2034-12-31" />
+            <label for="startdate">End Date</label>
+            <input type="date" id="enddate" name="enddate" min="2024-04-22" max="2034-12-31" />
+            <input type="submit" value="Save"/>
+        </form>
+    </div>
+</body>
+</html>
