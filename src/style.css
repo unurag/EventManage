@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Fjalla+One&display=swap');
+
+body{
+
+    background-color: #eee; 
+}
+
+*{
+    margin: 0;
+    font-family: "Fjalla One", sans-serif;
+    color: #1F1F21;
+}
+
+.container{
+    width: 100vw;
+    height: 100vh;
+}
+
+.eventname{
+    width: 100%;
+    background-color: blanchedalmond;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.eventname-heading{
+    margin: 0 10px;
+}
+
+.eventname-p{
+    font-family: "Fira Code", monospace;
+    color: #5B5B5A;
+    font-size: 15px;
+    font-weight: 600;
+}

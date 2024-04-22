@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react"
+import './style.css'
+import axios from "axios"
+import PlayerTable from "./Components/PlayerTable"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+const App = () => {
+
+  const [eventDetails, setEventDetails] = useState();
+
+  useEffect(() => {
+    axios.get("http://127.0.0.1:5000/event").then((res) => {
+      setEventDetails(res.data)
+    });
+  }, []);
+
+  if (!eventDetails) return null;
+
+  return(
+    <div className="container">
+      <div className="eventname">
+        <h2 className="eventname-heading">{eventDetails["eventname"]}</h2>
+        <p className="eventname-p">({eventDetails["startdate"]} - {eventDetails["enddate"]})</p>
+      </div>
+      <PlayerTable gender="Mens" weight="53"/>
+      <PlayerTable gender="Womens" weight="63"/>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
